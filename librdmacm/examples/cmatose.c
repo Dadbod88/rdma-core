@@ -633,7 +633,7 @@ static int run_client(void)
 	}
 
 	for (i = 0; i < connections; i++) {
-		printf("src addr: %s", inet_ntoa(test.nodes[i].cma_id->route.addr.src_sin.sin_addr));
+		printf("src addr: %s\n", inet_ntoa(test.nodes[i].cma_id->route.addr.src_sin.sin_addr));
 	}
 	ret = 0;
 
