@@ -44,6 +44,8 @@
 #include <rdma/rdma_cma.h>
 #include "common.h"
 
+#include <arpa/inet.h>
+
 struct cmatest_node {
 	int			id;
 	struct rdma_cm_id	*cma_id;
@@ -630,6 +632,9 @@ static int run_client(void)
 		printf("data transfers complete\n");
 	}
 
+	for (i = 0; i < connections; i++) {
+		printf("src addr: %s", inet_ntoa(test.nodes[i].cma_id->route.addr.src_sin.sin_addr));
+	}
 	ret = 0;
 
 	if (migrate) {
