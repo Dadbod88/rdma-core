@@ -426,7 +426,7 @@ static void destroy_nodes(void)
 static int poll_cqs(enum CQ_INDEX index)
 {
 	struct ibv_wc wc[8];
-	int done, i, ret;
+	int done, i, ret, j;
 
 	for (i = 0; i < connections; i++) {
 		if (!test.nodes[i].connected)
@@ -438,6 +438,9 @@ static int poll_cqs(enum CQ_INDEX index)
 				printf("cmatose: failed polling CQ: %d\n", ret);
 				return ret;
 			}
+			printf("polled %d cqes\n", ret);
+			for (j = 0; j < ret; j++)
+				printf("%d\n", wc[j].status);
 		}
 	}
 	return 0;
