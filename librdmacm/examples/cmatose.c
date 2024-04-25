@@ -438,7 +438,8 @@ static int poll_cqs(enum CQ_INDEX index)
 				printf("cmatose: failed polling CQ: %d\n", ret);
 				return ret;
 			}
-			printf("polled %d cqes\n", ret);
+			if (ret)
+				printf("polled %d cqes\n", ret);
 			for (j = 0; j < ret; j++)
 				printf("%d\n", wc[j].status);
 		}
