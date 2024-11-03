@@ -323,15 +323,19 @@ static int cma_handler(struct rdma_cm_id *cma_id, struct rdma_cm_event *event)
 
 	switch (event->event) {
 	case RDMA_CM_EVENT_ADDR_RESOLVED:
+		printf("Received address resolved event...\n");
 		ret = addr_handler(cma_id->context);
 		break;
 	case RDMA_CM_EVENT_ROUTE_RESOLVED:
+		printf("Received route resolved event...\n");
 		ret = route_handler(cma_id->context);
 		break;
 	case RDMA_CM_EVENT_CONNECT_REQUEST:
+		printf("Received connect request event...\n");
 		ret = connect_handler(cma_id);
 		break;
 	case RDMA_CM_EVENT_ESTABLISHED:
+		printf("Received connect established event...\n");
 		((struct cmatest_node *) cma_id->context)->connected = 1;
 		test.connects_left--;
 		test.disconnects_left++;
