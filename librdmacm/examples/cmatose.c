@@ -324,6 +324,7 @@ static int cma_handler(struct rdma_cm_id *cma_id, struct rdma_cm_event *event)
 	switch (event->event) {
 	case RDMA_CM_EVENT_ADDR_RESOLVED:
 		printf("Received address resolved event...\n");
+		printf("client src addr: %s\n", inet_ntoa(cma_id->route.addr.src_sin.sin_addr));
 		ret = addr_handler(cma_id->context);
 		break;
 	case RDMA_CM_EVENT_ROUTE_RESOLVED:
@@ -620,8 +621,6 @@ static int run_client(void)
 		}
 	}
 
-	printf("client src addr: %s\n", inet_ntoa(test.nodes[0].cma_id->route.addr.src_sin.sin_addr));
-
 	ret = connect_events();
 	if (ret)
 		goto disc;
@@ -642,9 +641,10 @@ static int run_client(void)
 		printf("data transfers complete\n");
 	}
 
-	for (i = 0; i < connections; i++) {
+	/*for (i = 0; i < connections; i++) {
 		printf("src addr: %s\n", inet_ntoa(test.nodes[i].cma_id->route.addr.src_sin.sin_addr));
-	}
+	}*/
+
 	ret = 0;
 
 	if (migrate) {
