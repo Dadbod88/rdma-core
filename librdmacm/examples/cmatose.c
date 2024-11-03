@@ -620,6 +620,8 @@ static int run_client(void)
 		}
 	}
 
+	printf("client src addr: %s\n", inet_ntoa(test.nodes[0].cma_id->route.addr.src_sin.sin_addr));
+
 	ret = connect_events();
 	if (ret)
 		goto disc;
