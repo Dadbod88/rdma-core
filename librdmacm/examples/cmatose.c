@@ -325,6 +325,7 @@ static int cma_handler(struct rdma_cm_id *cma_id, struct rdma_cm_event *event)
 	case RDMA_CM_EVENT_ADDR_RESOLVED:
 		printf("Received address resolved event...\n");
 		printf("client src addr: %s\n", inet_ntoa(cma_id->route.addr.src_sin.sin_addr));
+		printf("client src dev: %s\n", ibv_get_device_name(cma_id->verbs->device));
 		ret = addr_handler(cma_id->context);
 		break;
 	case RDMA_CM_EVENT_ROUTE_RESOLVED:
