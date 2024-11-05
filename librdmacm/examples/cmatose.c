@@ -353,6 +353,7 @@ static int cma_handler(struct rdma_cm_id *cma_id, struct rdma_cm_event *event)
 		ret = event->status;
 		break;
 	case RDMA_CM_EVENT_DISCONNECTED:
+		printf("Received disconnect event disconnecting...\n");
 		rdma_disconnect(cma_id);
 		test.disconnects_left--;
 		break;
